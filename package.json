@@ -1,0 +1,45 @@
+{
+  "name": "@arunv11u/common",
+  "version": "1.0.0",
+  "description": "This package will contain server foundation including database, kafka, aws-S3 storage storage connection, keycloak authentication and authorization, stripe payment integration, winston logger for handling server logs, nconf for managing multiple environment configuration and kafka integration for queue messaging",
+  "main": "./build/index.js",
+  "types": "./build/index.d.ts",
+  "files": [
+    "build/**/*"
+  ],
+  "scripts": {
+    "clean": "del ./build/*",
+    "build": "npm run clean && tsc && cp -r ./src/assets ./build/assets",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Arun Varadharajalu",
+  "license": "ISC",
+  "devDependencies": {
+    "@types/express": "^4.17.13",
+    "@types/jsonwebtoken": "^8.5.8",
+    "@types/lodash": "^4.14.178",
+    "@types/nconf": "^0.10.1",
+    "@types/socketio-jwt-auth": "^0.0.2",
+    "del-cli": "^3.0.1",
+    "typescript": "^4.2.2"
+  },
+  "dependencies": {
+    "@rtsglobal/kn-common": "^2.2.66",
+    "aws-sdk": "^2.1066.0",
+    "express": "^4.17.2",
+    "firebase-admin": "^11.0.0",
+    "fs": "^0.0.1-security",
+    "joi": "^17.5.0",
+    "jsonwebtoken": "^8.5.1",
+    "kafkajs": "^1.16.0",
+    "keycloak-admin": "^1.14.22",
+    "keycloak-backend": "^2.0.1",
+    "keycloak-nodejs-admin-client": "^1.14.1",
+    "keycloak-verify": "^0.4.0",
+    "lodash": "^4.17.21",
+    "mongoose": "6.1.7",
+    "nconf": "^0.11.3",
+    "stripe": "^9.5.0",
+    "winston": "^3.4.0"
+  }
+}
