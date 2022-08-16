@@ -8,7 +8,7 @@ class BaseResponse<T> {
 
 interface BaseResponseHandler {
     ok<T>(response: express.Response, data?: T): express.Response<BaseResponse<T>>;
-    created(response: express.Response): express.Response<undefined>;
+    created<T>(response: express.Response): express.Response<BaseResponse<T>>;
     clientError(message?: string): GenericValidationError;
     unauthorized(message?: string): GenericValidationError;
     paymentRequired(message?: string): GenericValidationError;
@@ -34,8 +34,11 @@ class ResponseHandler implements BaseResponseHandler {
         }
     };
 
-    created(response: express.Response): express.Response<undefined> {
-        return response.sendStatus(201);
+    created<T>(response: express.Response, data?: T): express.Response<BaseResponse<T>> {
+        if (!data) return response.status(201).send({ data: null });
+
+        response.type('application/json');
+        return response.status(201).send({ data });
     };
 
     clientError(message: string = "Bad Request"): GenericValidationError {
