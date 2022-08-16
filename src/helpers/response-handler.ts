@@ -76,6 +76,7 @@ class ResponseHandler implements BaseResponseHandler {
 };
 
 export {
+    BaseResponse,
     BaseResponseHandler,
     ResponseHandler
 };
