@@ -3,7 +3,7 @@ import { UserQuery } from 'keycloak-admin/lib/resources/users';
 import UserRepresentation from 'keycloak-nodejs-admin-client/lib/defs/userRepresentation';
 import { SSOConnect } from '..';
 import { SSOAuth } from '../foundation';
-import { SSOUserClient, SSOUserRole } from '../interfaces';
+import { SSOUserClient, SSOUserRole } from '../types';
 
 interface SSODatabaseService {
     saveUser(userData: UserRepresentation): Promise<string>;

@@ -1,6 +1,6 @@
 import mongoose, { ClientSession, FilterQuery, Model, PipelineStage } from "mongoose";
 import { MongooseService } from './';
-import { SortTypes, PaginatorTypes, SimplePaginatorOptions, PaginatorOptions } from '../interfaces';
+import { SortTypes, PaginatorTypes, SimplePaginatorOptions, PaginatorOptions } from '../types';
 import { CollationOptions } from 'mongodb';
 
 const mongooseService = MongooseService.getInstance();

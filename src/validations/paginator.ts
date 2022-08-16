@@ -1,4 +1,4 @@
-import { PaginatorTypes, SortTypes } from "../interfaces";
+import { PaginatorTypes, SortTypes } from "../types";
 import Joi from 'joi';
 
 const paginatorTypePossibilities = Object.values(PaginatorTypes);

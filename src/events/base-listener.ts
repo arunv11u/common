@@ -1,4 +1,4 @@
-import { Event, CustomConsumerMessage } from '../interfaces';
+import { Event, CustomConsumerMessage } from '../types';
 import { KafkaMessage, Message } from 'kafkajs';
 
 export abstract class Listener<T extends Event> {

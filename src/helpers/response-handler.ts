@@ -1,5 +1,6 @@
 import express from 'express';
 import { GenericValidationError } from '../errors';
+import { TypedResponse } from '../types';
 
 
 class BaseResponse<T> {
@@ -23,7 +24,7 @@ class ResponseHandler implements BaseResponseHandler {
 
     constructor() { };
 
-    ok<T>(response: express.Response, data?: T): express.Response<BaseResponse<T>> {
+    ok<ResBody, Locals>(response: TypedResponse<BaseResponse<ResBody>, Locals>, data?: ResBody): express.Response<BaseResponse<ResBody>> {
         try {
             if (!data) return response.status(200).send({ data: null });
 
@@ -34,8 +35,8 @@ class ResponseHandler implements BaseResponseHandler {
         }
     };
 
-    created<T>(response: express.Response, data?: T): express.Response<BaseResponse<T>> {
-        if (!data) return response.status(201).send({ data: null });
+    created<ResBody, Locals>(response: TypedResponse<BaseResponse<ResBody>, Locals>, data?: ResBody): express.Response<BaseResponse<ResBody>> {
+        if (!data) return response.status(201).send({ data: null});
 
         response.type('application/json');
         return response.status(201).send({ data });

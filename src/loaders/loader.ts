@@ -4,7 +4,7 @@ import { ConsumerConfig, ConsumerRunConfig, ProducerConfig } from 'kafkajs';
 import { Environment } from '../';
 import { GenericValidationError } from '../errors';
 import { UnHandledAndUnCaught, Nconf, MongooseConnect, WinstonLogger, DefaultConfig, LogPath, S3StorageConnect, KafkaClient, SSOConnect, StripeConnect, FCMConnect } from '../foundation';
-import { CronJob, Routes, BaseLoadModules } from '../interfaces';
+import { CronJob, Routes, BaseLoadModules } from '../types';
 import KcAdminClient from 'keycloak-admin';
 import { Listener } from '../events';
 

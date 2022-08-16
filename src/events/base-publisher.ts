@@ -1,5 +1,5 @@
 import { KafkaClient } from '../foundation';
-import { CustomProducerMessage, Event } from '../interfaces';
+import { CustomProducerMessage, Event } from '../types';
 import { CompressionTypes, RecordMetadata, IHeaders } from 'kafkajs';
 
 const kafkaClient = KafkaClient.getInstance();

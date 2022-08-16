@@ -1,6 +1,6 @@
 import { FCMConnect } from "../foundation";
 import firebaseAdmin from 'firebase-admin';
-import { FCMMessage, NotificationPayload, NotificationTypes } from "../interfaces";
+import { FCMMessage, NotificationPayload, NotificationTypes } from "../types";
 import { Message } from 'firebase-admin/messaging';
 import { GenericValidationError } from "../errors";
 

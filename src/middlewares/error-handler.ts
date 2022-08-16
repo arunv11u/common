@@ -2,7 +2,7 @@ import { NextFunction, Request, Response } from "express";
 import { ClientSession } from "mongoose";
 import { CustomError } from "../errors";
 import { WinstonLogger } from "../foundation";
-import { FormattedError } from "../interfaces";
+import { FormattedError } from "../types";
 
 export const errorHandler = async (err: Error,
     req: Request,

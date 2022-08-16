@@ -11,8 +11,8 @@ export * from './foundation';
 //* Helpers
 export * from './helpers';
 
-//* Models
-export * from './interfaces';
+//* Types
+export * from './types';
 
 //* Loaders
 export * from './loaders';

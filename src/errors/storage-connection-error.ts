@@ -1,5 +1,5 @@
 import { CustomError } from './';
-import { ErrorObject } from '../interfaces';
+import { ErrorObject } from '../types';
 
 export class StorageConnectionError extends CustomError {
     reason = 'Error, connecting to the cloud storage';

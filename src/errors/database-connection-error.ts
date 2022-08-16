@@ -1,4 +1,4 @@
-import { ErrorObject } from '../interfaces/error';
+import { ErrorObject } from '../types';
 import { CustomError } from './custom-error';
 
 export class DatabaseConnectionError extends CustomError {

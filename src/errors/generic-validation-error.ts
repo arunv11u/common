@@ -1,5 +1,5 @@
 import { CustomError } from './';
-import { ErrorObject, GenericError } from '../interfaces';
+import { ErrorObject, GenericError } from '../types';
 
 
 export class GenericValidationError extends CustomError {
