@@ -1,6 +1,6 @@
 {
   "name": "@arunv11u/common",
-  "version": "1.0.3",
+  "version": "1.0.4",
   "description": "This package will contain server foundation including database, kafka, aws-S3 storage storage connection, keycloak authentication and authorization, stripe payment integration, winston logger for handling server logs, nconf for managing multiple environment configuration and kafka integration for queue messaging",
   "main": "./build/index.js",
   "types": "./build/index.d.ts",
