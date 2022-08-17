@@ -104,10 +104,11 @@ class MongooseService implements DatabaseService {
      * @param options 
      * @returns 
      */
-    async save<DocType>(docRef: HydratedDocument<DocType>, options?: SaveOptions): Promise<DocType | Document<unknown, any, DocType> & { _id: mongoose.Types.ObjectId }> {
+    //  DocType | Document<unknown, any, DocType> & { _id: mongoose.Types.ObjectId }
+    async save<DocType>(docRef: HydratedDocument<DocType>, options?: SaveOptions): Promise<DocType> {
         await this._reconnectIfDisconnected();
 
-        return await docRef.save(options);
+        return await docRef.save(options) as DocType;
     };
 
     /**
