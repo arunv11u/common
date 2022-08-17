@@ -28,6 +28,9 @@ export * from './notification';
 //* Paginator interfaces
 export * from './paginator';
 
+//* Query interfaces
+export * from './query';
+
 //* Routes Interfaces
 export * from './routes';
 
