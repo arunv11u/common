@@ -4,18 +4,18 @@ import { AggregateOptions, UpdateResult, CollationOptions } from 'mongodb';
 import { MongooseConnect } from '../foundation';
 
 interface DatabaseService {
-    findById<DocType>(collRef: Model<DocType>, id: string, projection?: Record<string, any>, options?: QueryOptions, session?: ClientSession): Promise<mongoose.HydratedDocument<DocType> | null>;
-    findOne<DocType>(collRef: Model<DocType>, query: FilterQuery<DocType>, projection?: Record<string, any>, options?: QueryOptions, session?: ClientSession): Promise<HydratedDocument<DocType> | null>;
-    find<DocType>(collRef: Model<DocType>, query: FilterQuery<DocType>, projection?: Record<string, any>, options?: QueryOptions, sort?: Record<string, number>, skip?: number, limit?: number, session?: ClientSession, collationOptions?: CollationOptions): Promise<HydratedDocument<DocType>[]>;
-    save<DocType>(docRef: HydratedDocument<DocType>, options?: SaveOptions): Promise<DocType | Document<unknown, any, DocType> & { _id: mongoose.Types.ObjectId }>;
-    findByIdAndUpdate<DocType>(collRef: Model<DocType>, id: string, updateQuery: UpdateQuery<DocType>, options?: QueryOptions, session?: ClientSession): Promise<HydratedDocument<DocType> | null>;
-    findOneAndUpdate<DocType>(collRef: Model<DocType>, query: FilterQuery<DocType>, updateQuery: UpdateQuery<DocType>, options?: QueryOptions, session?: ClientSession): Promise<HydratedDocument<DocType> | null>;
+    findById<DocType>(collRef: Model<DocType>, id: string, projection?: Record<string, any>, options?: QueryOptions, session?: ClientSession): Promise<DocType | null>;
+    findOne<DocType>(collRef: Model<DocType>, query: FilterQuery<DocType>, projection?: Record<string, any>, options?: QueryOptions, session?: ClientSession): Promise<DocType | null>;
+    find<DocType>(collRef: Model<DocType>, query: FilterQuery<DocType>, projection?: Record<string, any>, options?: QueryOptions, sort?: Record<string, number>, skip?: number, limit?: number, session?: ClientSession, collationOptions?: CollationOptions): Promise<DocType[]>;
+    save<DocType>(docRef: HydratedDocument<DocType>, options?: SaveOptions): Promise<DocType>;
+    findByIdAndUpdate<DocType>(collRef: Model<DocType>, id: string, updateQuery: UpdateQuery<DocType>, options?: QueryOptions, session?: ClientSession): Promise<DocType | null>;
+    findOneAndUpdate<DocType>(collRef: Model<DocType>, query: FilterQuery<DocType>, updateQuery: UpdateQuery<DocType>, options?: QueryOptions, session?: ClientSession): Promise<DocType | null>;
     updateOne<DocType>(collRef: Model<DocType>, query: FilterQuery<DocType>, updateQuery: UpdateWithAggregationPipeline | UpdateQuery<DocType>, options?: QueryOptions, session?: ClientSession): Promise<UpdateResult>;
     updateMany<DocType>(collRef: Model<DocType>, query: FilterQuery<DocType>, updateQuery: UpdateWithAggregationPipeline | UpdateQuery<DocType>, options?: QueryOptions, session?: ClientSession): Promise<UpdateResult>;
     aggregate<DocType>(collRef: Model<DocType>, pipeline?: PipelineStage[], options?: AggregateOptions, session?: ClientSession): Promise<any[]>;
     countDocuments<DocType>(collRef: Model<DocType>, query: FilterQuery<DocType>, options?: QueryOptions, session?: ClientSession): Promise<number>;
-    insertMany<DocType>(collRef: Model<DocType>, docs: DocType[], options?: mongoose.InsertManyOptions & { rawResult: true }): Promise<mongoose.HydratedDocument<DocType, {}, {}>[]>;
-    findOneAndDelete<DocType>(collRef: Model<DocType>, query: FilterQuery<DocType>, options?: QueryOptions, session?: ClientSession): Promise<HydratedDocument<DocType> | null>;
+    insertMany<DocType>(collRef: Model<DocType>, docs: DocType[], options?: mongoose.InsertManyOptions & { rawResult: true }): Promise<DocType[]>;
+    findOneAndDelete<DocType>(collRef: Model<DocType>, query: FilterQuery<DocType>, options?: QueryOptions, session?: ClientSession): Promise<DocType | null>;
 };
 
 class MongooseService implements DatabaseService {
@@ -45,7 +45,7 @@ class MongooseService implements DatabaseService {
      * @param session 
      * @returns 
      */
-    async findById<DocType>(collRef: Model<DocType>, id: string, projection?: Record<string, any>, options?: QueryOptions, session?: ClientSession): Promise<mongoose.HydratedDocument<DocType> | null> {
+    async findById<DocType>(collRef: Model<DocType>, id: string, projection?: Record<string, any>, options?: QueryOptions, session?: ClientSession): Promise<DocType | null> {
         await this._reconnectIfDisconnected();
 
         const _query = collRef.findById(id, projection, options);
@@ -63,7 +63,7 @@ class MongooseService implements DatabaseService {
      * @param session 
      * @returns 
      */
-    async findOne<DocType>(collRef: Model<DocType>, query: FilterQuery<DocType>, projection?: Record<string, any>, options?: QueryOptions, session?: ClientSession): Promise<HydratedDocument<DocType> | null> {
+    async findOne<DocType>(collRef: Model<DocType>, query: FilterQuery<DocType>, projection?: Record<string, any>, options?: QueryOptions, session?: ClientSession): Promise<DocType | null> {
         await this._reconnectIfDisconnected();
 
         const _query = collRef.findOne(query, projection, options);
@@ -84,7 +84,7 @@ class MongooseService implements DatabaseService {
      * @param session 
      * @returns 
      */
-    async find<DocType>(collRef: Model<DocType>, query: FilterQuery<DocType>, projection?: Record<string, any>, options?: QueryOptions, sort?: Record<string, number>, skip?: number, limit?: number, session?: ClientSession, collationOptions?: CollationOptions, distinct?: string): Promise<HydratedDocument<DocType>[]> {
+    async find<DocType>(collRef: Model<DocType>, query: FilterQuery<DocType>, projection?: Record<string, any>, options?: QueryOptions, sort?: Record<string, number>, skip?: number, limit?: number, session?: ClientSession, collationOptions?: CollationOptions, distinct?: string): Promise<DocType[]> {
         await this._reconnectIfDisconnected();
 
         const _query = collRef.find(query, projection, options);
@@ -104,7 +104,6 @@ class MongooseService implements DatabaseService {
      * @param options 
      * @returns 
      */
-    //  DocType | Document<unknown, any, DocType> & { _id: mongoose.Types.ObjectId }
     async save<DocType>(docRef: HydratedDocument<DocType>, options?: SaveOptions): Promise<DocType> {
         await this._reconnectIfDisconnected();
 
@@ -120,7 +119,7 @@ class MongooseService implements DatabaseService {
      * @param session
      * @returns
      */
-    async findByIdAndUpdate<DocType>(collRef: Model<DocType>, id: string, updateQuery: UpdateQuery<DocType>, options?: QueryOptions, session?: ClientSession): Promise<HydratedDocument<DocType> | null> {
+    async findByIdAndUpdate<DocType>(collRef: Model<DocType>, id: string, updateQuery: UpdateQuery<DocType>, options?: QueryOptions, session?: ClientSession): Promise<DocType | null> {
         await this._reconnectIfDisconnected();
 
         const _query = collRef.findByIdAndUpdate(id, updateQuery, options);
@@ -138,7 +137,7 @@ class MongooseService implements DatabaseService {
      * @param session 
      * @returns 
      */
-    async findOneAndUpdate<DocType>(collRef: Model<DocType>, query: FilterQuery<DocType>, updateQuery: UpdateQuery<DocType>, options?: QueryOptions, session?: ClientSession): Promise<HydratedDocument<DocType> | null> {
+    async findOneAndUpdate<DocType>(collRef: Model<DocType>, query: FilterQuery<DocType>, updateQuery: UpdateQuery<DocType>, options?: QueryOptions, session?: ClientSession): Promise<DocType | null> {
         await this._reconnectIfDisconnected();
 
         const _query = collRef.findOneAndUpdate(query, updateQuery, options);
@@ -217,7 +216,7 @@ class MongooseService implements DatabaseService {
         return await _query;
     };
 
-    async insertMany<DocType>(collRef: Model<DocType>, docs: DocType[], options?: mongoose.InsertManyOptions & { rawResult: true }): Promise<mongoose.HydratedDocument<DocType, {}, {}>[]> {
+    async insertMany<DocType>(collRef: Model<DocType>, docs: DocType[], options?: mongoose.InsertManyOptions & { rawResult: true }): Promise<DocType[]> {
         await this._reconnectIfDisconnected();
 
         const _query = collRef.insertMany(docs, options);
@@ -225,7 +224,7 @@ class MongooseService implements DatabaseService {
         return await _query;
     };
 
-    async findOneAndDelete<DocType>(collRef: Model<DocType>, query: FilterQuery<DocType>, options?: QueryOptions, session?: ClientSession): Promise<HydratedDocument<DocType> | null> {
+    async findOneAndDelete<DocType>(collRef: Model<DocType>, query: FilterQuery<DocType>, options?: QueryOptions, session?: ClientSession): Promise<DocType | null> {
         await this._reconnectIfDisconnected();
 
         const _query = collRef.findOneAndDelete(query, options);
